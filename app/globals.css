@@ -1,26 +1,70 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: night --default;
+  root: ":root";
+  include: ;
+  exclude: ;
+  prefix: ;
+  logs: true;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --app-max-width: 480px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.app-wrapper {
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  min-height: 100vh;        /* full høyde */
+  display: flex;
+  flex-direction: column;    /* kolonne-layout som standard */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow-x: hidden;        /* ingen horisontal scroll */
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  height: 100%;
 }
-
 body {
-  background: var(--background);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overscroll-behavior: none;               /* hindrer bouncing på mobil */
+  -webkit-tap-highlight-color: transparent; /* fjern blå highlight på touch */
+  touch-action: manipulation;              /* optimal touch-interaksjon */
+  font-family: Arial, Helvetica, sans-serif; /* fallback-font */
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+main {
+  padding-top: calc(1rem + env(safe-area-inset-top));
+  padding-left: calc(1rem + env(safe-area-inset-left));
+  padding-right: calc(1rem + env(safe-area-inset-right));
+}
+
+h1 {
+  @apply text-6xl font-semibold text-secondary font-mono;
+}
+
+h2 {
+  @apply text-4xl font-semibold font-mono;
+}
+
+h3 {
+  @apply text-3xl font-medium font-mono;
+}
+
+h4 {
+  @apply text-2xl font-medium font-mono;
+}
+
+h5 {
+  @apply text-xl font-semibold font-mono ;
+}
+
+h6 {
+  @apply text-lg font-semibold font-mono;
 }
