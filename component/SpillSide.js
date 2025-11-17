@@ -15,9 +15,9 @@ export default function SpillSide() {
             </div>
 
             <div className="flex flex-col items-center justify-center w-10/10">
-                <h5 className="mb-5">Hva er neste tall i rekken..?</h5>
-                <div className="flex flex-col items-center justify-center gap-10 bg-info w-10/10 rounded-2xl pb-5 pt-5 text-info-content">
-                    <h3>1, 3, 10, 15, 21, ? </h3>
+                <h5 className="mb-5 text-secondary">Hva er neste tall i rekken..?</h5>
+                <div className="flex flex-col items-center justify-center gap-10 bg-secondary-content w-10/10 rounded-2xl pb-5 pt-5 ">
+                    <h3>1, 3, 10, 15, 21, <span className= "text-secondary underline underline-offset-5">?</span> </h3>
                     <input type="text" placeholder="?" className="input input-secondary w-50 text-center text-secondary font-black text-7xl p-0 mb-5 h-25" />
                 </div>
             </div>

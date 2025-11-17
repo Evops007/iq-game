@@ -2,7 +2,7 @@
 
 export default function DeltagerSide() {
     return (
-        <div className="flex flex-col h-full justify-between items-center justify-between">
+        <div className="flex flex-col h-full items-center justify-between">
             <h2>Deltager 1</h2>
             <div className="flex flex-col gap-6 text-center h-3/10 justify-between">
                 <div className="flex flex-col items-center gap-5" >
