@@ -4,11 +4,11 @@ export default function SpillSide() {
     const counter = 30
     return (
         <div className="flex flex-col h-full items-center justify-between">
-            <div className="flex flex-row justify-between items-center bg-secondary-content rounded-2xl w-10/10 pt-2 pb-2">
-                <div className="ml-5 mr-5 flex flex-row justify-between items-center w-10/10">
-                    <h6 className="font-light! text-secondary">1/10</h6>
+            <div className="flex flex-row justify-between items-center bg-secondary rounded-2xl w-10/10 pt-2 pb-2">
+                <div className="ml-5 mr-5 flex flex-row justify-between items-center w-10/10 text-secondary-content">
+                    <h6 className="font-light!">1/10</h6>
                     <h4>Deltager 1</h4>
-                    <span className="countdown text-secondary">
+                    <span className="countdown ">
                         <span style={{"--value":30} } aria-live="polite" aria-label={counter}>36</span>
                     </span>
                 </div>
@@ -24,7 +24,7 @@ export default function SpillSide() {
 
             <div className="flex flex-row-reverse justify-between w-10/10">
                 <button className="btn btn-success">Fortsett</button>
-                <button class="btn btn-soft btn-secondary">Tilbake</button>
+                <button className="btn btn-soft btn-secondary">Tilbake</button>
             </div>
         </div>
     )
