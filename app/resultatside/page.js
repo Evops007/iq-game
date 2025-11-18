@@ -1,4 +1,4 @@
-import ResultatSide from "@/component/ResultatSide";
+import ResultatSide from "@/app/component/ResultatSide";
 
 
 export default function Resultat() {

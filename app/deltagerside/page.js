@@ -1,4 +1,4 @@
-import DeltagerSide from "@/component/DeltagerSide";
+import DeltagerSide from "@/app/component/DeltagerSide";
 
 
 export default function Deltager() {

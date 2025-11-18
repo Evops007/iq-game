@@ -13,11 +13,11 @@ export default function ResultatSide(){
             </div>
             <div className="flex flex-col gap-6 text-center h-10/10 justify-between w-full">
                 <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-                    <table className="table w-">
+                    <table className="table">
                         {/* head */}
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>Plassering</th>
                                 <th>Navn</th>
                                 <th>IQ</th>
                             </tr>
@@ -26,7 +26,7 @@ export default function ResultatSide(){
                             {/* row 1 */}
                             <tr>
                                 <th>1</th>
-                                <td>Cy Ganderton</td>
+                                <td>Deltager 2</td>
                                 <td>128</td>
                             </tr>
                             {/* row 2 */}

@@ -1,4 +1,4 @@
-import SpillSide from "@/component/SpillSide";
+import SpillSide from "@/app/component/SpillSide";
 
 
 

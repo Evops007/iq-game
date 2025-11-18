@@ -1,9 +1,14 @@
 "use client"
+import { useSearchParams } from "next/navigation";
 
 export default function DeltagerSide() {
+
+    const searchParams = useSearchParams();
+    const gameCode = searchParams.get("code");
+
     return (
         <div className="flex flex-col h-full items-center justify-between">
-            <h2>Deltager 1</h2>
+            <h2>Deltager 1 {gameCode}</h2>
             <div className="flex flex-col gap-6 text-center h-3/10 justify-between">
                 <div className="flex flex-col items-center gap-5" >
                     <span className="loading loading-spinner text-secondary" ></span>
