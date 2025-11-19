@@ -23,7 +23,7 @@ export async function addPlayerToGame(gameCode, playerName) {
     { gameCode },
     { 
       $push: { 
-        players: { name: playerName, joinedAt: new Date() } 
+        players: { name: playerName, joinedAt: new Date(), isTargeted: false } 
       } 
     }
   );
@@ -45,7 +45,7 @@ export async function createGame(gameCode) {
     status: "waiting", // "waiting" | "playing" | "finished"
     createdAt: new Date()
   };
-
+  
   const result = await db.collection("games").insertOne(newGame);
   console.log("Nytt spill opprettet:", newGame);
 }
