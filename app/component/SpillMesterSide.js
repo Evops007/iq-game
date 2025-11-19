@@ -1,7 +1,7 @@
 "use client"
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { addPlayerToGame } from "../actions/db";
+import { addPlayerToGame, updateGameStatus } from "../actions/db";
 
 export default function SpillMesterSide({ gameCode }) {
     const [hostName, setHostName] = useState("")
@@ -51,6 +51,17 @@ export default function SpillMesterSide({ gameCode }) {
         }
     };
 
+    const handleStartGame = async () => {
+        try {
+            await updateGameStatus(gameCodeFromUrl, "live"); // gameCode fra URL eller state
+            console.log("Spillet er nå live!");
+            // eventuelt naviger videre til spillsiden
+        } catch (error) {
+            console.error("Kunne ikke starte spillet:", error);
+        }
+    };
+
+
 
     return (
          <div className="flex flex-col h-full items-center justify-start gap-20 overflow-y-auto">
@@ -84,7 +95,7 @@ export default function SpillMesterSide({ gameCode }) {
                             <button type="button" onClick={handleJoinGame} className="btn join-item">Lagre</button>
                         </div>
                     </fieldset>
-                    <button className="btn btn-active btn-secondary w-full">Start spill</button>
+                    <button onClick={handleStartGame} className="btn btn-active btn-secondary w-full">Start spill</button>
                  </div>
             </div>
         </div>

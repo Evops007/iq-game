@@ -55,7 +55,7 @@ export default function StartSide(){
     const handleJoinGame = async () => {
         try {
             await addPlayerToGame(gameCode, name); // gameCode og name fra state
-            router.push(`/deltagerside?code=${gameCode}`);      // gå videre til spillet
+            router.push(`/deltagerside?code=${gameCode}&name=${name}`);      // gå videre til spillet
         } catch (error) {
             console.error(error);
             setShowError(true);                     // vis feilmelding
