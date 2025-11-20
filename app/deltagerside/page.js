@@ -1,3 +1,5 @@
+"use client"
+
 import DeltagerSide from "@/app/component/DeltagerSide";
 
 
