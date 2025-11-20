@@ -111,7 +111,7 @@ export default function SpillSide() {
     }
 
     return (
-        <div className="flex flex-col h-full items-center justify-between">
+        <div className="flex flex-col h-full items-center justify-between mb-5">
             <div className="flex flex-row justify-between items-center bg-secondary rounded-2xl w-10/10 pt-2 pb-2">
                 <div className="ml-5 mr-5 flex flex-row justify-between items-center w-10/10 text-secondary-content">
                     <h6 className="font-light! text-2xl!">{currentIndex + 1}/10</h6>
@@ -137,10 +137,10 @@ export default function SpillSide() {
 
             <div className="flex flex-col items-center justify-center w-10/10">
                 <h5 className="mb-5 text-secondary">Hva er neste tall i rekken..?</h5>
-                <div className="flex flex-col items-center justify-center gap-10 bg-secondary-content w-10/10 rounded-2xl pb-5 pt-5 ">
-                    <h3 className="text-xl!">{questions[currentIndex].sekvens.split("?")[0]} <span className= "text-secondary underline underline-offset-5">?</span> </h3>
+                <div className="flex flex-col items-center justify-center gap-10 bg-secondary-content rounded-2xl pb-5 pt-5 w-full pl-2 pr-2 text-center ">
+                    <h6>{questions[currentIndex].sekvens.split("?")[0]} <span className= "text-secondary underline underline-offset-5 font-bold">?</span> </h6>
                     <input 
-                    type="text" 
+                    type="tel" 
                     placeholder="?"
                     value={answer}
                     onChange={e => setAnswer(e.target.value)} 
@@ -148,7 +148,7 @@ export default function SpillSide() {
                 </div>
             </div>
 
-            <div className="flex flex-row-reverse justify-between w-10/10">
+            <div className="flex flex-row-reverse justify-between w-10/10 mb-5">
                 <button disabled={!answer} onClick={handleNext} className="btn btn-success w-10/10">Fortsett</button>
             </div>
 
