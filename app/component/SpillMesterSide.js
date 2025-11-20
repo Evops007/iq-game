@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { addPlayerToGame, updateGameStatus } from "../actions/db";

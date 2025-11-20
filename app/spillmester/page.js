@@ -1,4 +1,5 @@
 "use client";
+
 import SpillMesterSide from "../component/SpillMesterSide";
 
 export default async function SpillMester() {
