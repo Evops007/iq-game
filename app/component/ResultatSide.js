@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link"
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ResultatTabell from "./ResultatTabell";
 
@@ -9,12 +8,16 @@ import ResultatTabell from "./ResultatTabell";
 
 export default function ResultatSide(){
     
-    const searchParams = useSearchParams();
-    const name = searchParams.get("name")
-    const gameCode = searchParams.get("code");
+    const [name, setName] = useState("");
+    const [gameCode, setGameCode] = useState("");
     const [score, setScore] = useState("");
     const [gameStatus, setGameStatus] = useState("live");
 
+      useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setName(params.get("name") || "");
+        setGameCode(params.get("code") || "");
+    }, []);
 
     useEffect(() => {
         async function loadScore() {
