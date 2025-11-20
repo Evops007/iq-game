@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 export default function SpillMesterSide({ gameCode }) {
     const [hostName, setHostName] = useState("")
     const [players, setPlayers] = useState([])
-    const [gameCode, setGameCode] = useState("");
+    const [gameCodeFromUrl, setGameCodeFromUrl] = useState("");
     const name = hostName
     const router = useRouter();
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        setGameCode(params.get("code") || "");
+        setGameCodeFromUrl(params.get("code") || "");
     }, []);
 
     const fetchPlayers = async () => {
