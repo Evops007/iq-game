@@ -1,14 +1,19 @@
 "use client"
-import { useSearchParams } from "next/navigation";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function DeltagerSide() {
 
-    const searchParams = useSearchParams();
-    const gameCode = searchParams.get("code");
-    const name = searchParams.get("name")
+    const [gameCode, setGameCode] = useState(null);
+    const [name, setName] = useState(null);
     const router = useRouter();
+
+     useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setGameCode(params.get("code"));
+        setName(params.get("name"));
+    }, []);
 
     useEffect(() => {
     if (!gameCode || !name) return;
