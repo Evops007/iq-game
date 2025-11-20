@@ -1,6 +1,8 @@
 import clientPromise from "@/libs/mongo";
 
 export async function POST(req) {
+  console.log("getPlayerScore route called");
+
   const { gameCode, name } = await req.json();
 
   const client = await clientPromise;

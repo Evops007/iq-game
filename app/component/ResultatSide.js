@@ -12,8 +12,15 @@ export default function ResultatSide(){
     const [gameCode, setGameCode] = useState("");
     const [score, setScore] = useState("");
     const [gameStatus, setGameStatus] = useState("live");
+    const [players, setPlayers] = useState([]);
 
-      useEffect(() => {
+       useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setName(params.get("name") || "");
+        setGameCode(params.get("code") || "");
+    }, []);
+
+        useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         setName(params.get("name") || "");
         setGameCode(params.get("code") || "");
@@ -55,7 +62,7 @@ export default function ResultatSide(){
             </div>
             <div className="flex flex-col gap-6 text-center h-10/10 justify-between w-full">
                 <div className={gameStatus === "live" ? "blur-sm" : "" } >
-                    <ResultatTabell gameCode={gameCode}/>
+                    <ResultatTabell gameCode={gameCode} players={players}/>
                 </div>
                 <Link href="/">
                     <button className="btn btn-active btn-secondary w-full">Spill igjen</button>

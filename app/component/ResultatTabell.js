@@ -5,27 +5,29 @@ import { useState, useEffect } from "react";
 export default function ResultatTabell({ gameCode }) {
 
     const [players, setPlayers] = useState([]);
-
     useEffect(() => {
-        if (!gameCode) return;
+            if (!gameCode) return;
 
-        const fetchScores = async () => {
-            const res = await fetch("/api/getScores", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ gameCode })
-            });
+            const fetchScores = async () => {
+                try {
+                    const res = await fetch("/api/getScores", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ gameCode })
+                    });
+                    const data = await res.json();
+                    const sorted = data.players.sort((a, b) => b.score - a.score);
+                    setPlayers(sorted);
+                } catch (err) {
+                    console.error("Kunne ikke hente scores:", err);
+                }
+            };
 
-            const data = await res.json();
+            fetchScores(); // hent med en gang
+            const interval = setInterval(fetchScores, 1500); // hent hvert 1,5 sekund
 
-            // sorter fra høyest til lavest
-            const sorted = data.players.sort((a, b) => b.score - a.score);
-
-            setPlayers(sorted);
-        };
-
-        fetchScores();
-    }, [gameCode]);
+            return () => clearInterval(interval); // rydd opp når komponenten unmountes
+        }, [gameCode]);
 
 
     return (
