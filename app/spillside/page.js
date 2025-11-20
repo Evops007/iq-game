@@ -1,7 +1,5 @@
 import SpillSide from "@/app/component/SpillSide";
 
-
-
 export default function Spill() {
   return (
     <div className="min-h-screen flex">
