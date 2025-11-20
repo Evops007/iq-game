@@ -1,3 +1,5 @@
+"use client";
+
 import ResultatSide from "@/app/component/ResultatSide";
 
 
