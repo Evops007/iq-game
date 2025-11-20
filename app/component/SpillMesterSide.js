@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { addPlayerToGame, updateGameStatus } from "../actions/db";
 import { useRouter } from "next/navigation";
@@ -14,25 +13,29 @@ export default function SpillMesterSide({ gameCode }) {
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        setGameCodeFromUrl(params.get("code") || "");
+        const code = params.get("code") || "";
+        setGameCodeFromUrl(code);
     }, []);
 
-    const fetchPlayers = async () => {
-        try {
-        const res = await fetch(`/api/getPlayers?code=${gameCodeFromUrl}`);
-        const data = await res.json();
-        setPlayers(data.players);
-        } catch (err) {
-        console.error("Kunne ikke hente spillere:", err);
-        }
-    };
-
+    // Hent spillere når vi har gameCode
     useEffect(() => {
-        fetchPlayers(); // hent når komponenten mountes
+        if (!gameCodeFromUrl) return; // bare kjør hvis vi har kode
 
+        const fetchPlayers = async () => {
+            try {
+                const res = await fetch(`/api/getPlayers?code=${gameCodeFromUrl}`);
+                const data = await res.json();
+                setPlayers(data.players);
+            } catch (err) {
+                console.error("Kunne ikke hente spillere:", err);
+            }
+        };
+
+        fetchPlayers(); // hent med en gang
         const interval = setInterval(fetchPlayers, 2000); // hent hvert 2. sekund
+
         return () => clearInterval(interval);
-    }, [gameCode]);
+    }, [gameCodeFromUrl]); // bruk gameCodeFromUrl
 
      const handleJoinGame = async (e) => {
         try {
