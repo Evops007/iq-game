@@ -11,9 +11,15 @@ export default function SpillSide() {
     const [questions, setQuestions] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [answer, setAnswer] = useState("");
-    const searchParams = useSearchParams();
-    const name = searchParams.get("name")
-    const gameCode = searchParams.get("code");
+    const [name, setName] = useState("");
+    const [gameCode, setGameCode] = useState("");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setName(params.get("name") || "");
+        setGameCode(params.get("code") || "");
+    }, []);
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
