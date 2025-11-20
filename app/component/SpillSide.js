@@ -1,11 +1,11 @@
 "use client"
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { assignScores } from "../actions/db";
 
 export default function SpillSide() {
-    const [secondsLeft, setSecondsLeft] = useState(1 * 60); // 7 minutter
+    const [secondsLeft, setSecondsLeft] = useState(7 * 60); // 7 minutter
     const router = useRouter();
     const [questions, setQuestions] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,22 +44,27 @@ export default function SpillSide() {
         "7": {sekvens: "100, 100, 99, 97, 96, 92, 91, 85, ?"},
         "8": {sekvens: "1.5, 4.75, 8, 11.25, 14.5, ?"},
         "9": {sekvens: "1, 2, 6, 21, 88, ?"},
-        "10": {sekvens: "1, 1, 2, ?, 24, 120, 720"},
-        "11": {sekvens: "110, ?, 99, 81, 72, 63, 54, 45"},
+        "10": {sekvens: "17, -24, 41, -65, 106, ?"},
+        "11": {sekvens: "95, 89, 77, 59, ?"},
         "12": {sekvens: "5, 26, 131, 656, ?"},
         "13": {sekvens: "1, 1, 3, 15, 105, ?"},
-        "14": {sekvens: "36, 72, ?, 144, 180, 216, 252"},
+        "14": {sekvens: "1, 3, 6, 10, 15, ?"},
         "15": {sekvens: "9, 16, 25, 36, 49, ?"},
         "16": {sekvens: "0, 100, 6, 94, 12, 88, 18, 82, ?"},
         "17": {sekvens: "100, 50, 200, 25, 400, ?"},
-        "18": {sekvens: "2, 5.75, ?, 13.25, 17, 20.75"},
+        "18": {sekvens: "1, 4, 10, 20, 35, ?"},
         "19": {sekvens: "0, 1, 4, 9, 16, 25, 36, 49, ?"},
-        "20": {sekvens: "28, 33, 31, 36, ?, 39"},
+        "20": {sekvens: "11, 23, 38, 11, 23, ?"},
         "21": {sekvens: "1, 4, 9, 16, 25, ?"},
         "22": {sekvens: "25, 5, 36, 6, 81, 9, 121, ?"},
         "23": {sekvens: "1, 2, 6, 24, 120, ?"},
         "24": {sekvens: "15, 25, 30, 50, 60, 100, ?"},
         "25": {sekvens: "1 , 3 , 8 , 19, ?"},
+        "26": {sekvens: "6, 28, 12, 14, 24, 7, ?"},
+        "27": {sekvens: "7, 19, 43, 91, ?"},
+        "28": {sekvens: "17, 32, 61, 118, ?"},
+        "29": {sekvens: "23, 25, 28, 32, 34, 37, ?"},
+        "30": {sekvens: "32, 112, 392, 1372, 4802, ?"},
     };
 
      useEffect(() => {
@@ -78,7 +83,7 @@ export default function SpillSide() {
             await fetch(`/api/assignScores`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ gameCode })
+                body: JSON.stringify({ gameCode, playerName: name })
             });
 
             // Send deltageren til resultatsiden

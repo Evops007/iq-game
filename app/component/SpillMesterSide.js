@@ -2,12 +2,15 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { addPlayerToGame, updateGameStatus } from "../actions/db";
+import { useRouter } from "next/navigation";
 
 export default function SpillMesterSide({ gameCode }) {
     const [hostName, setHostName] = useState("")
     const [players, setPlayers] = useState([])
     const searchParams = useSearchParams();
     const gameCodeFromUrl = searchParams.get("code");
+    const name = hostName
+    const router = useRouter();
 
     const fetchPlayers = async () => {
         try {
@@ -55,6 +58,7 @@ export default function SpillMesterSide({ gameCode }) {
         try {
             await updateGameStatus(gameCodeFromUrl, "live"); // gameCode fra URL eller state
             console.log("Spillet er nå live!");
+            router.push(`/spillside?code=${gameCodeFromUrl}&name=${name}`)
             // eventuelt naviger videre til spillsiden
         } catch (error) {
             console.error("Kunne ikke starte spillet:", error);

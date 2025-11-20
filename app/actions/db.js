@@ -5,9 +5,9 @@ import clientPromise from "@/libs/mongo";
 
 export async function getUsers() {
   const client = await clientPromise;
-  const db = client.db("dev");
+  const db = client.db("production");
 
-  return db.collection("users").find().toArray();
+  return db.collection("games").find().toArray();
 }
 
 /**
@@ -68,29 +68,43 @@ export async function updateGameStatus(gameCode, newStatus) {
   return { success: true };
 }
 
-export async function assignScores(gameCode) {
+export async function assignScores(gameCode, playerName) {
   const client = await clientPromise;
   const db = client.db("production");
 
   const game = await db.collection("games").findOne({ gameCode });
-
   if (!game) throw new Error("Spillet finnes ikke");
 
-  const updatedPlayers = game.players.map(player => {
-    if (player.score != null) return player; // ikke overskriv score hvis allerede satt
+  // Finn spilleren som skal få score nå
+  const player = game.players.find(p => p.name === playerName);
+  if (!player) throw new Error("Spiller finnes ikke");
 
-    const min = player.isTargeted ? 98 : 121;
-    const max = player.isTargeted ? 112 : 133;
-    return {
-      ...player,
-      score: Math.floor(Math.random() * (max - min + 1)) + min
-    };
-  });
+  // Hvis spilleren allerede har score — ikke gjør noe
+  if (player.score != null) return game.players;
 
+  // Lag tilfeldig score basert på isTargeted
+  const min = player.isTargeted ? 98 : 121;
+  const max = player.isTargeted ? 112 : 133;
+  const randomScore = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  // Oppdater kun denne spilleren
   await db.collection("games").updateOne(
-    { gameCode },
-    { $set: { players: updatedPlayers } }
+    { gameCode, "players.name": playerName },
+    { $set: { "players.$.score": randomScore } }
   );
 
-  return updatedPlayers;
+  // Sjekk om ALLE spillere har score nå
+  const updatedGame = await db.collection("games").findOne({ gameCode });
+  const allScored = updatedGame.players.every(p => p.score != null);
+
+  if (allScored) {
+    await db.collection("games").updateOne(
+      { gameCode },
+      { $set: { status: "finished" } }
+    );
+  }
+
+  return updatedGame.players;
 }
+
+

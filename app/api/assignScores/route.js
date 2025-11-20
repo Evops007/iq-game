@@ -1,10 +1,10 @@
-import { assignScores } from "@/app/actions/db"; 
+import { assignScores } from "@/app/actions/db";
 
 export async function POST(req) {
-  const { gameCode } = await req.json();
+  const { gameCode, playerName } = await req.json();
 
   try {
-    const updatedPlayers = await assignScores(gameCode);
+    const updatedPlayers = await assignScores(gameCode, playerName);
     return Response.json({ success: true, players: updatedPlayers });
   } catch (err) {
     console.error(err);
